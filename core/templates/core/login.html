@@ -1,0 +1,63 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %}  | Login {% endblock %}
+
+
+{% block content %}
+
+
+    <div class="px-6 py-6">
+
+    <div class="w-1/2 my-6 mx-auto px-6 py-6 pb-8 bg-black border-2 border-white rounded-xl">
+
+        <h1 class="mb-6 text-3xl text-white">Login</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+
+
+            <div class="mb-3">
+                <label for="" class="inline-block text-white mb-2">UserName</label> <br>
+                {{ form.username  }}
+            </div>
+
+          
+           
+
+            <div class="mb-3">
+                <label for="" class="inline-block text-white mb-2">Enter Password</label> <br>
+                {{ form.password }}
+            </div>
+
+            {% if form.errors or form.non_field_errors %}
+
+                <div class="mb-3 p-6 bg-red-100 rounded">
+                    {% for field in form %}
+
+                        {{field.errors}}
+
+
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+
+                </div>
+
+
+            {% endif %}
+
+            <button class="py-4 px-8 my-6 mx-20 mb-3 bg-oplueas text-white items-center  text-xl rounded-xl font-semibold hover:bg-teal-700">Submit</button>
+                <div class="mt-4">
+                    <p class="mb-8 p-6 bg-white rounded">
+                    Don't Have An Account Sign Up
+                    </p>
+
+                    <a href="{% url 'core:signup' %}" class="py-4 px-8 my-6 mx-20 mb-3 bg-oplueas text-white items-center text-xl rounded-xl font-semibold hover:bg-teal-700">Signup</a>
+
+                </div>
+        </form>
+        
+
+
+    </div>
+</div>
+{% endblock %}

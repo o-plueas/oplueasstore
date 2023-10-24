@@ -1,0 +1,67 @@
+{% extends 'core/base.html' %}
+ {%block title %} Detail Page {% endblock %}
+
+
+ {% block content %}
+    <div class="grid grid-cols-5 gap-6">
+
+        <div class="cols-span-3">
+            <img src="{{ item.image.url}}"  class="rounded-t-xl" alt="">
+        </div>
+
+        <div class="bg-white rounded-b-xl p-6 cols-span-2">
+            <h1 class="text-2xl text-black">{{item.name}}</h1>
+
+            <p class="text-gray-500"><strong>Price: </strong>{{item.price}}</p>
+            <p class="text-gray-500"><strong>Seller: </strong>{{item.created_by}}</p>
+
+            {% if item.description %}
+
+                <p class="mb-8">{{item.description}}</p>
+
+            {% endif %}
+
+
+            {% if request.user == item.created_by %}
+
+            <div class="mt-4 p-6 rounded-t-xl w-full">
+
+                <a  class="text-white inline-block text-2xl bg-black py-4 px-6 mb-1 my-6 rounded-xl" href="{% url 'item:edit' item.id %}">Edit</a>
+                <a  class="text-white inline-block text-2xl bg-red-700 py-4 px-6 mt-1 my-6 rounded-xl" href="{% url 'item:delete' item.id %}">Delete</a>
+                {% else %}
+                <a  class="text-white text-l bg-black py-4 px-6 mt-6 my-6 rounded-xl" href="{% url 'conversation:new' item.id %}">Conversation</a>
+                <a 
+                    href="#" 
+                    class="mt-6 inline-block py-4 px-6 mt-6 my-6 rounded-xl bg-oplueas text-white hover:text-red-800"
+                    hx-get="{% url 'add_to_cart' item.id %}"
+                    hx-target="#menu-cart-button"
+                    hx-swap="outerHTML"
+                >
+                    Add to cart
+                </a>
+    
+            </div>
+           
+
+
+            {% endif %}
+
+           
+        </div>
+
+    </div>
+
+
+
+
+ {% endblock%}
+
+
+
+
+
+
+
+
+
+

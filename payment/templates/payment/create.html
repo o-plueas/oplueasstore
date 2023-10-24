@@ -1,0 +1,82 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %}  | Login {% endblock %}
+
+
+{% block content %}
+
+    <div class="px-6 py-6">
+
+    <div class="w-1/2 my-6 mx-auto px-6 py-6 pb-8 bg-gray-100 rounded-xl">
+
+        <h1 class="mb-6 text-3xl">Checkout</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">first name</label> <br>
+                {{ form.first_name  }}
+            </div>
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Enter last name</label> <br>
+                {{ form.last_name }}
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Enter email</label> <br>
+                {{ form.email }}
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Enter phone</label> <br>
+                {{ form.phone }}
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Enter address</label> <br>
+                {{ form.address }}
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Enter zipcode</label> <br>
+                {{ form.zipcode }}
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Enter city</label> <br>
+                {{ form.city }}
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="inline-block mb-2">Enter amount</label> <br>
+                <input type="text" value="${{ cart.get_total_cost }}", name="amount">
+            </div>
+
+
+            {% if form.errors or form.non_field_errors %}
+
+                <div class="mb-3 p-6 bg-red-100 rounded">
+                    {% for field in form %}
+
+                        {{field.errors}}
+
+
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+
+                </div>
+
+
+            {% endif %}
+
+            <button class="py-4 px-8 my-6 mx-20 mb-3 bg-teal-500 items-center text-xl rounded-xl font-semibold hover:bg-teal-700">Initialize payment</button>
+                
+        </form>
+        
+
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block title %}  | Home{% endblock %}
+
+
+{% block content %}
+   
+        <div class="mt-1  px-6 py-12 bg-red-50 rounded-xl">
+          
+            
+
+           <div class="grid grid-cols-4 px-15 mt-1 gap-3">
+            {% for item in items %}
+
+                <div>
+                    <a href="{% url 'item:detail'  item.id %}">
+                   
+                    <div class="p-6 rounded-xl w-full h-25"><img src="{{item.image.url}}" alt="" class="rounded-xl"></div>
+                    <div class="p-6 bg-white rounded-b-xl">
+                    <h2 class="text-l gray-400 p-2">{{item.name}}</h2>
+
+                    <p class=" gray-400 p-2">{{item.price}}</p>
+        
+                    </div>
+                    </a>
+
+                    <a 
+                        href="#"
+                        hx-get="{% url 'add_to_cart' item.id %}"
+                        hx-target="#menu-cart-button"
+                        hx-swap="outerHTML"
+                        class="text-red-500 hover:text-oplueas">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </a>
+                </div>
+
+
+            {% endfor %}
+           </div>
+        </div>
+
+        <div class="grid grid-cols-6 gap-3">
+
+            {% for category in categories %}
+            <div class="p-6 bg-white rounded-b-xl">
+                <h2 class="text-2xl">{{category.name}}</h2>
+                <p class="text-gray-500">Item: {{category.items.count}}</p>
+            </div>
+
+
+
+
+            {% endfor %}
+        </div>
+
+
+
+   
+
+    {% endblock %}
